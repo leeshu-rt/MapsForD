@@ -1,0 +1,44 @@
+---
+title: "Counties"
+author: "C Schultz"
+date: "2/14/2022"
+output: html_document
+---
+
+This is from a quick search:
+
+Draw geographical maps: https://cran.r-project.org/web/packages/maps/maps.pdf
+US maps: https://cran.r-project.org/web/packages/usmap/vignettes/mapping.html
+A lot of great techniques (seems to be a NOAA guy): https://eriqande.github.io/rep-res-web/lectures/making-maps-with-R.html
+Another review of various methods: https://jtr13.github.io/cc19/different-ways-of-plotting-u-s-map-in-r.html
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+## Try usmap package
+
+```{r}
+library(usmap)
+library(ggplot2)
+
+plot_usmap(regions = "counties", color = "grey", size = 0.25) +
+  labs(title = "US Counties") +
+  theme(panel.background = element_rect(color = "black", fill = "lightblue")) 
+
+head(countypop)
+
+```
+```{r}
+plot_usmap(regions = "counties", color = "grey", size = 0.2, 
+           data = countypov, values = "pct_pov_2014") +
+           # include = c("MD", "DC")) +
+  scale_fill_continuous(low = "white", high = "blue", name = "Pct poverty, 2014 estimates") +
+  theme(legend.position = "right")
+
+
+```
+
+
+
+
+```{r}
