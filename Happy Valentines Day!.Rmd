@@ -1,0 +1,38 @@
+---
+title: "HappyValentinesDay"
+author: "C Schultz"
+date: "2/14/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+#
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+
+# Colors
+colors <- colorRampPalette(c("red", "white"))
+
+# Function
+heart <- function(r, col) {
+  t <- seq(0, 2*pi, length.out = 100)
+  x <- r*sin(t)^3
+  y <- (13*r/16)*cos(t) - (5*r/16)*cos(2*t) - (2*r/16)*cos(3*t) - (r/16)*cos(4*t)
+  polygon(x, y, col = col, border = col)
+}
+
+# Make the image
+plot.new()
+plot.window(xlim = c(-16, 16), ylim = c(-16, 13))
+mapply(heart, seq(16, 0, length.out = 10), colors(10))
+
+```
+
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
